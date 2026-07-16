@@ -74,7 +74,7 @@ def recursive_translate(original, translated, path=""):
         if not original.strip():
             return original
 
-        print(f"Перевожу: {path}")
+        print(f"translate: {path}")
         result = mad_translate(original)
         # Сохраняем прогресс после каждой строки
         save_json(current_data, PROGRESS_FILE)
@@ -83,15 +83,15 @@ def recursive_translate(original, translated, path=""):
         return original if translated is None else translated
 
 # ---------- Загрузка ----------
-print("Загружаю оригинал...")
+print("loading origine file...")
 en_data = load_json(EN_FILE)
 if en_data is None:
-    print(f"Ошибка: {EN_FILE} не найден.")
+    print(f"Error: {EN_FILE} EN.json not found.")
     sys.exit(1)
 
 progress = load_json(PROGRESS_FILE)
 if progress is None:
-    print("Прогресс не найден. Начинаем с нуля.")
+    print("progres isnt founde. start с нуля.")
     # Создаём заготовку с None на месте всех строк
     def nullify(obj):
         if isinstance(obj, dict):
@@ -104,7 +104,7 @@ if progress is None:
             return obj
     progress = nullify(en_data)
 else:
-    print("Прогресс найден. Продолжаем...")
+    print("progres find. continew...")
 
 current_data = progress
 
@@ -112,19 +112,19 @@ current_data = progress
 try:
     final = recursive_translate(en_data, current_data)
 except KeyboardInterrupt:
-    print("\n\nПеревод прерван пользователем. Сохраняю прогресс...")
+    print("\n\ntranslate stoped by user. save progres...")
     save_json(current_data, PROGRESS_FILE)
-    print(f"Прогресс сохранён в {PROGRESS_FILE}. Запустите скрипт снова, чтобы продолжить.")
+    print(f"Прогресс сохранён в {PROGRESS_FILE}. start script again to continew.")
     sys.exit(0)
 except Exception as e:
     print(f"\nНепредвиденная ошибка: {e}")
     save_json(current_data, PROGRESS_FILE)
-    print(f"Прогресс сохранён. Вы можете продолжить позже.")
+    print(f"progres saved. you can continew late.")
     sys.exit(1)
 
 # Если дошли сюда без Ctrl+C – всё переведено
 save_json(final, FINAL_FILE)
-print(f"\n🎉 Полный перевод завершён! Файл: {FINAL_FILE}")
+print(f"\n🎉 full translate complited! file: {FINAL_FILE}")
 # Удаляем файл прогресса, чтобы в следующий раз начать заново (по желанию)
 if os.path.exists(PROGRESS_FILE):
     os.remove(PROGRESS_FILE)
