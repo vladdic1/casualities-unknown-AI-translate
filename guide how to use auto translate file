@@ -1,0 +1,3 @@
+First, create a Python file (if you don't have Python installed, simply install it).
+
+Then, paste the script and edit the translation chain. To avoid a "file not found" error (e.g., "Error: EN.json not found"), use the `cd` command to navigate to the folder containing both the Python file and the translation file—they must be in the same folder. Finally, type `python` followed by the Python file name (separated by a space) into the command line, and the output will appear in your folder.
