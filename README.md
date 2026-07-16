@@ -1,2 +1,2 @@
 # casualities-unknown-AI-translate
-there soon be all languages
+Hi everyone visiting this repository. Two months ago, I had an idea and wrote a simple script to translate the game into about 15 languages; back then, I did it just for myself and didn't update the translation. Now, however, I’ve decided to translate the game into all available languages ​​using that same method. The translation script is included in the repository, so feel free to modify it however you like. That’s all for now—oh, and I’m currently translating the game into Russian.
